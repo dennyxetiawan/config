@@ -1,0 +1,183 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+profile:
+  store-selected: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:7874
+  nameserver:
+    - 8.8.8.8
+    - 1.0.0.1
+    - https://dns.google/dns-query
+  fallback:
+    - 1.1.1.1
+    - 8.8.4.4
+    - https://cloudflare-dns.com/dns-query
+    - 112.215.203.254
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 112.215.203.254
+proxies:
+  - name: serverssh-vmessid01
+    server: idray.serverip.my.id
+    port: 80
+    type: vmess
+    uuid: 6499707d-ce04-4912-bda2-fbcdcf780685
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: serverssh-vlessid01
+    server: idray.serverip.my.id
+    port: 80
+    type: vless
+    uuid: bf77b7e7-e45d-4d0a-a361-1d6d69129413
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken/serverssh/api
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: serverssh-vmessg01
+    server: sg1ray.serverip.my.id
+    port: 80
+    type: vmess
+    uuid: 979f424d-77df-40a1-a23c-3967a6bf21da
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: serverssh-vlesssg01
+    server: sg1ray.serverip.my.id
+    port: 80
+    type: vless
+    uuid: 5bd1b83d-4a4c-4ac1-b2b1-b67cce14b0e3
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken/serverssh/api
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: vlessjp-globalssh
+    server: vless-sis-jp01.globalssh.xyz
+    port: 80
+    type: vless
+    uuid: fb813bc9-2b24-47e4-b463-76cb0a37c180
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: vless-sis-jp01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: sshmax-dennysg1
+    server: sg1-vmess.sshmax.xyz
+    port: 80
+    type: vmess
+    uuid: e3f59777-733e-47bc-8754-753fa127e8fd
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken/vmess
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+proxy-groups:
+  - name: Trafic-Umum
+    type: select
+    proxies:
+      - serverssh-vmessid01
+      - serverssh-vlessid01
+      - serverssh-vmessg01
+      - serverssh-vlesssg01
+      - vlessjp-globalssh
+      - sshmax-dennysg1
+      - FALLBACK
+      - BEST-PING
+      - LOAD-BALANCE
+      - DIRECT
+  - name: FALLBACK
+    type: fallback
+    url: https://speed.cloudflare.com/
+    interval: 100
+    proxies:
+      - serverssh-vmessid01
+      - serverssh-vlessid01
+      - serverssh-vmessg01
+      - serverssh-vlesssg01
+      - vlessjp-globalssh
+      - sshmax-dennysg1
+  - name: BEST-PING
+    type: url-test
+    url: https://speed.cloudflare.com/
+    interval: 300
+    tolerance: 50
+    proxies:
+      - serverssh-vmessid01
+      - serverssh-vlessid01
+      - serverssh-vmessg01
+      - serverssh-vlesssg01
+      - vlessjp-globalssh
+      - sshmax-dennysg1
+  - name: LOAD-BALANCE
+    type: load-balance
+    strategy: round-robin
+    url: https://speed.cloudflare.com/
+    interval: 300
+    proxies:
+      - serverssh-vmessid01
+      - serverssh-vlessid01
+      - serverssh-vmessg01
+      - serverssh-vlesssg01
+      - vlessjp-globalssh
+      - sshmax-dennysg1
+rule-providers:
+  clash:
+    type: http
+    behavior: domain
+    url: https://howdy.id/download/rules/clash.txt
+    path: ./providers/rule-provider_clash.yaml
+    interval: 86400
+rules:
+ - RULE-SET,clash,REJECT
+ - MATCH,Trafic-Umum
