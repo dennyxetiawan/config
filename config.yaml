@@ -92,33 +92,49 @@ proxies:
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: vlessjp-globalssh
-    server: vless-sis-jp01.globalssh.xyz
+  - name: vlesswhid-globalssh
+    server: vless-wh-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: fb813bc9-2b24-47e4-b463-76cb0a37c180
+    uuid: 79ca9b61-66cd-4f4b-9111-51701e829151
     cipher: auto
     tls: false
     skip-cert-verify: true
-    servername: vless-sis-jp01.globalssh.xyz
+    servername: vless-wh-id01.globalssh.xyz
     network: ws
     ws-opts:
       path: /api/v1/token/hetoken
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: sshmax-dennysg1
-    server: sg1-vmess.sshmax.xyz
+  - name: vlessikdid-globalssh
+    server: vless-ikd-id01.globalssh.xyz
+    port: 80
+    type: vless
+    uuid: e67c630d-5273-47d5-9195-21fd209d93be
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: vless-ikd-id01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: vmesssg-globalssh
+    server: vmess-sg01.globalssh.xyz
     port: 80
     type: vmess
-    uuid: e3f59777-733e-47bc-8754-753fa127e8fd
+    uuid: b6d961a4-a5ab-4073-a142-ffe54481dc86
     alterId: 0
     cipher: auto
     tls: false
     skip-cert-verify: true
+    servername: vmess-sg01.globalssh.xyz
     network: ws
     ws-opts:
-      path: /api/v1/token/hetoken/vmess
+      path: /api/v1/token/hetoken
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
@@ -130,8 +146,9 @@ proxy-groups:
       - serverssh-vlessid01
       - serverssh-vmessg01
       - serverssh-vlesssg01
-      - vlessjp-globalssh
-      - sshmax-dennysg1
+      - vlesswhid-globalssh
+      - vlessikdid-globalssh
+      - vmesssg-globalssh
       - FALLBACK
       - BEST-PING
       - LOAD-BALANCE
@@ -145,8 +162,9 @@ proxy-groups:
       - serverssh-vlessid01
       - serverssh-vmessg01
       - serverssh-vlesssg01
-      - vlessjp-globalssh
-      - sshmax-dennysg1
+      - vlesswhid-globalssh
+      - vlessikdid-globalssh
+      - vmesssg-globalssh
   - name: BEST-PING
     type: url-test
     url: https://speed.cloudflare.com/
@@ -157,8 +175,9 @@ proxy-groups:
       - serverssh-vlessid01
       - serverssh-vmessg01
       - serverssh-vlesssg01
-      - vlessjp-globalssh
-      - sshmax-dennysg1
+      - vlesswhid-globalssh
+      - vlessikdid-globalssh
+      - vmesssg-globalssh
   - name: LOAD-BALANCE
     type: load-balance
     strategy: round-robin
@@ -169,8 +188,9 @@ proxy-groups:
       - serverssh-vlessid01
       - serverssh-vmessg01
       - serverssh-vlesssg01
-      - vlessjp-globalssh
-      - sshmax-dennysg1
+      - vlesswhid-globalssh
+      - vlessikdid-globalssh
+      - vmesssg-globalssh
 rule-providers:
   clash:
     type: http
