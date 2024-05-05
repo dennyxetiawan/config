@@ -1,0 +1,16 @@
+proxies:
+  - name: VVIP-IPTUNNELS-ID
+    server: idray.serverip.my.id
+    port: 80
+    type: vmess
+    uuid: 6499707d-ce04-4912-bda2-fbcdcf780685
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
