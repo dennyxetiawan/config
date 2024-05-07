@@ -30,7 +30,7 @@ dns:
   default-nameserver:
     - 8.8.8.8
     - 1.1.1.1
-    - 112.215.203.254
+    - 208.67.222.222
 proxies:
   - name: serverssh-vmessid01
     server: idray.serverip.my.id
@@ -96,7 +96,7 @@ proxies:
     server: vless-wh-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: 79ca9b61-66cd-4f4b-9111-51701e829151
+    uuid: 5b0a4410-9914-42be-a910-14dc0c3d0962
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -111,7 +111,7 @@ proxies:
     server: vless-ikd-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: e67c630d-5273-47d5-9195-21fd209d93be
+    uuid: f31fc8e1-ae8a-44ad-a071-a54d41dff10a
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -126,7 +126,7 @@ proxies:
     server: vmess-sg01.globalssh.xyz
     port: 80
     type: vmess
-    uuid: b6d961a4-a5ab-4073-a142-ffe54481dc86
+    uuid: 309aa1de-0715-40de-a620-2499c40aa6c1
     alterId: 0
     cipher: auto
     tls: false
@@ -135,6 +135,38 @@ proxies:
     network: ws
     ws-opts:
       path: /api/v1/token/hetoken
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: vlesssgg-globalssh
+    server: vless-sg01.globalssh.xyz
+    port: 80
+    type: vless
+    uuid: d8fbcbda-a570-43c7-adca-6df5ca95e0d8
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: vless-sg01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: vmesswhid-globalssh
+    server: vmess-wh-id01.globalssh.xyz
+    port: 80
+    type: vmess
+    uuid: 76c379ef-3da5-4ad5-b102-5d1b34f142fc
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: vmess-wh-id01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken/vmess-ws
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
@@ -149,6 +181,8 @@ proxy-groups:
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
+      - vlesssgg-globalssh
+      - vmesswhid-globalssh
       - FALLBACK
       - BEST-PING
       - LOAD-BALANCE
@@ -165,6 +199,8 @@ proxy-groups:
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
+      - vlesssgg-globalssh
+      - vmesswhid-globalssh
   - name: BEST-PING
     type: url-test
     url: https://speed.cloudflare.com/
@@ -178,6 +214,8 @@ proxy-groups:
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
+      - vlesssgg-globalssh
+      - vmesswhid-globalssh
   - name: LOAD-BALANCE
     type: load-balance
     strategy: round-robin
@@ -191,7 +229,13 @@ proxy-groups:
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
+      - vlesssgg-globalssh
+      - vmesswhid-globalssh
 rule-providers:
+  rule_Direct:
+    type: file
+    behavior: classical
+    path: "./rule_direct.yaml"
   clash:
     type: http
     behavior: domain
@@ -199,5 +243,8 @@ rule-providers:
     path: ./providers/rule-provider_clash.yaml
     interval: 86400
 rules:
+ - PROCESS-NAME,xray.exe,DIRECT
+ # - RULE-SET,rule_Direct,DIRECT,no-resolve
  - RULE-SET,clash,REJECT
  - MATCH,Trafic-Umum
+
