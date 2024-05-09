@@ -32,63 +32,65 @@ dns:
     - 1.1.1.1
     - 208.67.222.222
 proxies:
-  - name: serverssh-vmessid01
+  - name: serverssh-vmessid
     server: idray.serverip.my.id
     port: 80
     type: vmess
-    uuid: 6499707d-ce04-4912-bda2-fbcdcf780685
+    uuid: 2829a37a-fffb-4417-8ada-8d4d3b0b8f6b
     alterId: 0
     cipher: auto
     tls: false
     skip-cert-verify: true
+    servername: myim3-he.ioh.co.id
     network: ws
     ws-opts:
       path: /api/v1/token/hetoken
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: serverssh-vlessid01
-    server: idray.serverip.my.id
-    port: 80
-    type: vless
-    uuid: bf77b7e7-e45d-4d0a-a361-1d6d69129413
-    alterId: 0
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken/serverssh/api
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: serverssh-vmessg01
+  - name: serverssh-vmesssg
     server: sg1ray.serverip.my.id
     port: 80
     type: vmess
-    uuid: 979f424d-77df-40a1-a23c-3967a6bf21da
+    uuid: 13598a7d-4a34-4d32-8c80-4aaaba06b292
     alterId: 0
     cipher: auto
     tls: false
     skip-cert-verify: true
+    servername: myim3-he.ioh.co.id
     network: ws
     ws-opts:
       path: /api/v1/token/hetoken
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: serverssh-vlesssg01
-    server: sg1ray.serverip.my.id
+  - name: serverssh-vlessid
+    server: idray.serverip.my.id
     port: 80
     type: vless
-    uuid: 5bd1b83d-4a4c-4ac1-b2b1-b67cce14b0e3
-    alterId: 0
+    uuid: 524727b4-b0bf-4134-9cc5-2660a2edd3a5
     cipher: auto
     tls: false
     skip-cert-verify: true
+    servername: myim3-he.ioh.co.id
     network: ws
     ws-opts:
-      path: /api/v1/token/hetoken/serverssh/api
+      path: /api/v1/token/hetoken/serverssh/vray
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
+  - name: serverssh-vlesssg
+    server: sg1ray.serverip.my.id
+    port: 80
+    type: vless
+    uuid: cadf4252-cda8-44c8-be94-515f0314ed53
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: myim3-he.ioh.co.id
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken/serverssh/vray
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
@@ -142,7 +144,7 @@ proxies:
     server: vless-sg01.globalssh.xyz
     port: 80
     type: vless
-    uuid: d8fbcbda-a570-43c7-adca-6df5ca95e0d8
+    uuid: a0fda4c1-3a6d-418b-8a2a-24ca53e4e2b2
     alterId: 0
     cipher: auto
     tls: false
@@ -154,19 +156,19 @@ proxies:
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: vmesswhid-globalssh
-    server: vmess-wh-id01.globalssh.xyz
+  - name: vmessikdid-globalssh
+    server: vmess-ikd-id01.globalssh.xyz
     port: 80
     type: vmess
-    uuid: 76c379ef-3da5-4ad5-b102-5d1b34f142fc
+    uuid: 59cc619a-1bb3-422d-87ae-46760dfca976
     alterId: 0
     cipher: auto
     tls: false
     skip-cert-verify: true
-    servername: vmess-wh-id01.globalssh.xyz
+    servername: vmess-ikd-id01.globalssh.xyz
     network: ws
     ws-opts:
-      path: /api/v1/token/hetoken/vmess-ws
+      path: /api/v1/token/hetoken/vmess-ws/
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
@@ -174,15 +176,15 @@ proxy-groups:
   - name: Trafic-Umum
     type: select
     proxies:
-      - serverssh-vmessid01
-      - serverssh-vlessid01
-      - serverssh-vmessg01
-      - serverssh-vlesssg01
+      - serverssh-vmessid
+      - serverssh-vmesssg
+      - serverssh-vlessid
+      - serverssh-vlesssg
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
       - vlesssgg-globalssh
-      - vmesswhid-globalssh
+      - vmessikdid-globalssh
       - FALLBACK
       - BEST-PING
       - LOAD-BALANCE
@@ -191,46 +193,40 @@ proxy-groups:
     type: fallback
     url: https://speed.cloudflare.com/
     interval: 100
+    tolerance: 50
     proxies:
-      - serverssh-vmessid01
-      - serverssh-vlessid01
-      - serverssh-vmessg01
-      - serverssh-vlesssg01
+      - serverssh-vmessid
+      - serverssh-vmesssg
+      - serverssh-vlessid
+      - serverssh-vlesssg
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
       - vlesssgg-globalssh
-      - vmesswhid-globalssh
+      - vmessikdid-globalssh
   - name: BEST-PING
     type: url-test
     url: https://speed.cloudflare.com/
     interval: 300
     tolerance: 50
     proxies:
-      - serverssh-vmessid01
-      - serverssh-vlessid01
-      - serverssh-vmessg01
-      - serverssh-vlesssg01
+      - serverssh-vmessid
+      - serverssh-vmesssg
+      - serverssh-vlessid
+      - serverssh-vlesssg
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
       - vlesssgg-globalssh
-      - vmesswhid-globalssh
+      - vmessikdid-globalssh
   - name: LOAD-BALANCE
     type: load-balance
     strategy: round-robin
     url: https://speed.cloudflare.com/
     interval: 300
     proxies:
-      - serverssh-vmessid01
-      - serverssh-vlessid01
-      - serverssh-vmessg01
-      - serverssh-vlesssg01
-      - vlesswhid-globalssh
-      - vlessikdid-globalssh
       - vmesssg-globalssh
       - vlesssgg-globalssh
-      - vmesswhid-globalssh
 rule-providers:
   rule_Direct:
     type: file
@@ -247,4 +243,3 @@ rules:
  # - RULE-SET,rule_Direct,DIRECT,no-resolve
  - RULE-SET,clash,REJECT
  - MATCH,Trafic-Umum
-
