@@ -13,24 +13,119 @@ bind-address: "*"
 unified-delay: true
 profile:
   store-selected: true
+  store-fake-ip: true
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: redir-host
+  use-host: true
+  enhanced-mode: fake-ip
   listen: 0.0.0.0:7874
   nameserver:
-    - 8.8.8.8
-    - 1.0.0.1
-    - https://dns.google/dns-query
-  fallback:
     - 1.1.1.1
-    - 8.8.4.4
+    - 8.8.8.8
     - https://cloudflare-dns.com/dns-query
-    - 112.215.203.254
+  fallback:
+    - 1.0.0.1
+    - 8.8.4.4
+    - https://dns.google/dns-query
+    
   default-nameserver:
     - 8.8.8.8
     - 1.1.1.1
-    - 208.67.222.222
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
+    - "*.time.edu.cn"
+    - "*.ntp.org.cn"
+    - +.pool.ntp.org
+    - time1.cloud.tencent.com
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - "*.kuwo.cn"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - "*.music.migu.cn"
+    - music.migu.cn
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    - +.srv.nintendo.net
+    - +.stun.playstation.net
+    - xbox.*.microsoft.com
+    - xnotify.xboxlive.com
+    - +.battlenet.com.cn
+    - +.wotgame.cn
+    - +.wggames.cn
+    - +.wowsgame.cn
+    - +.wargaming.net
+    - proxy.golang.org
+    - stun.*.*
+    - stun.*.*.*
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - heartbeat.belkin.com
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    - "*.router.asus.com"
+    - mesu.apple.com
+    - swscan.apple.com
+    - swquery.apple.com
+    - swdownload.apple.com
+    - swcdn.apple.com
+    - swdist.apple.com
+    - lens.l.google.com
+    - stun.l.google.com
+    - +.nflxvideo.net
+    - "*.square-enix.com"
+    - "*.finalfantasyxiv.com"
+    - "*.ffxiv.com"
+    - "*.mcdn.bilivideo.cn"
+    - +.media.dssott.com
 proxies:
   - name: serverssh-vmessid
     server: idray.serverip.my.id
@@ -98,7 +193,7 @@ proxies:
     server: vless-wh-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: 5b0a4410-9914-42be-a910-14dc0c3d0962
+    uuid: bc0b74e6-14da-4ac2-8193-acfda0d5687c
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -113,7 +208,7 @@ proxies:
     server: vless-ikd-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: f31fc8e1-ae8a-44ad-a071-a54d41dff10a
+    uuid: 03e5b619-fc81-4070-8514-cee82b04ff40
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -128,7 +223,7 @@ proxies:
     server: vmess-sg01.globalssh.xyz
     port: 80
     type: vmess
-    uuid: 309aa1de-0715-40de-a620-2499c40aa6c1
+    uuid: bbd82cd9-1617-462d-a48d-ac845253b7f0
     alterId: 0
     cipher: auto
     tls: false
@@ -239,6 +334,7 @@ rule-providers:
     path: ./providers/rule-provider_clash.yaml
     interval: 86400
 rules:
+ - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - PROCESS-NAME,xray.exe,DIRECT
  # - RULE-SET,rule_Direct,DIRECT,no-resolve
  - RULE-SET,clash,REJECT
