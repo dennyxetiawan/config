@@ -279,7 +279,7 @@ proxy-groups:
       - vlessikdid-globalssh
       - vmesssg-globalssh
       - vlesssgg-globalssh
-      - vmessikdid-globalssh
+     # - vmessikdid-globalssh
       - FALLBACK
       - BEST-PING
       - LOAD-BALANCE
@@ -298,7 +298,7 @@ proxy-groups:
       - vlessikdid-globalssh
       - vmesssg-globalssh
       - vlesssgg-globalssh
-      - vmessikdid-globalssh
+     # - vmessikdid-globalssh
   - name: BEST-PING
     type: url-test
     url: https://speed.cloudflare.com/
@@ -313,7 +313,7 @@ proxy-groups:
       - vlessikdid-globalssh
       - vmesssg-globalssh
       - vlesssgg-globalssh
-      - vmessikdid-globalssh
+     # - vmessikdid-globalssh
   - name: LOAD-BALANCE
     type: load-balance
     strategy: round-robin
@@ -336,6 +336,7 @@ rule-providers:
 rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - PROCESS-NAME,xray.exe,DIRECT
+ - PROCESS-NAME,svchost.exe,REJECT
  # - RULE-SET,rule_Direct,DIRECT,no-resolve
  - RULE-SET,clash,REJECT
  - MATCH,Trafic-Umum
