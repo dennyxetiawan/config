@@ -5,7 +5,7 @@ mixed-port: 7893
 tproxy-port: 7895
 ipv6: false
 mode: rule
-log-level: silent
+log-level: info
 allow-lan: true
 external-controller: 0.0.0.0:9090
 secret: ""
@@ -131,7 +131,7 @@ proxies:
     server: idray.serverip.my.id
     port: 80
     type: vmess
-    uuid: 2829a37a-fffb-4417-8ada-8d4d3b0b8f6b
+    uuid: db807dae-c92e-453a-af86-6e11817074cb
     alterId: 0
     cipher: auto
     tls: false
@@ -147,7 +147,7 @@ proxies:
     server: sg1ray.serverip.my.id
     port: 80
     type: vmess
-    uuid: 13598a7d-4a34-4d32-8c80-4aaaba06b292
+    uuid: a0a7d2e1-70e2-432f-8b48-5ef54290c0aa
     alterId: 0
     cipher: auto
     tls: false
@@ -163,7 +163,7 @@ proxies:
     server: idray.serverip.my.id
     port: 80
     type: vless
-    uuid: 524727b4-b0bf-4134-9cc5-2660a2edd3a5
+    uuid: f8c69fe8-5c1d-40c5-ae44-bd841e97f540
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -178,7 +178,7 @@ proxies:
     server: sg1ray.serverip.my.id
     port: 80
     type: vless
-    uuid: cadf4252-cda8-44c8-be94-515f0314ed53
+    uuid: 6fa96c61-d460-4c5c-9e46-e212ed2e0e64
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -208,7 +208,7 @@ proxies:
     server: vless-ikd-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: 03e5b619-fc81-4070-8514-cee82b04ff40
+    uuid: 7407fb1f-68f7-4c29-bc08-e14fed161814
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -235,21 +235,21 @@ proxies:
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: vlesssgg-globalssh
-    server: vless-sg01.globalssh.xyz
-    port: 80
-    type: vless
-    uuid: a0fda4c1-3a6d-418b-8a2a-24ca53e4e2b2
+  - name: coba-globalssh
+    server: vmess-sg01.globalssh.xyz
+    port: 443
+    type: vmess
+    uuid: bbd82cd9-1617-462d-a48d-ac845253b7f0
     alterId: 0
     cipher: auto
     tls: false
     skip-cert-verify: true
-    servername: vless-sg01.globalssh.xyz
+    servername: www.opensignal.com
     network: ws
     ws-opts:
-      path: /api/v1/token/hetoken
+      path: /
       headers:
-        Host: myim3-he.ioh.co.id
+        Host: vmess-sg01.globalssh.xyz
     udp: true
   - name: vmessikdid-globalssh
     server: vmess-ikd-id01.globalssh.xyz
@@ -278,7 +278,7 @@ proxy-groups:
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
-      - vlesssgg-globalssh
+      - coba-globalssh
      # - vmessikdid-globalssh
       - FALLBACK
       - BEST-PING
@@ -297,7 +297,7 @@ proxy-groups:
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
-      - vlesssgg-globalssh
+      - coba-globalssh
      # - vmessikdid-globalssh
   - name: BEST-PING
     type: url-test
@@ -312,7 +312,7 @@ proxy-groups:
       - vlesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssg-globalssh
-      - vlesssgg-globalssh
+      - coba-globalssh
      # - vmessikdid-globalssh
   - name: LOAD-BALANCE
     type: load-balance
@@ -321,7 +321,7 @@ proxy-groups:
     interval: 300
     proxies:
       - vmesssg-globalssh
-      - vlesssgg-globalssh
+      - coba-globalssh
 rule-providers:
   rule_Direct:
     type: file
@@ -336,7 +336,7 @@ rule-providers:
 rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - PROCESS-NAME,xray.exe,DIRECT
- - PROCESS-NAME,svchost.exe,REJECT
+ # - PROCESS-NAME,svchost.exe,REJECT
  # - RULE-SET,rule_Direct,DIRECT,no-resolve
  - RULE-SET,clash,REJECT
  - MATCH,Trafic-Umum
