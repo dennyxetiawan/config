@@ -204,6 +204,22 @@ proxies:
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
+  - name: vmesswhid-globalssh
+    server: vmess-wh-id01.globalssh.xyz
+    port: 80
+    type: vmess
+    uuid: a2bf4fd8-3268-4845-a215-e61acba089e1
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: vmess-wh-id01.globalssh.xyz
+    network: ws
+    ws-opts:
+      path: /api/v1/token/hetoken/vmess-ws
+      headers:
+        Host: myim3-he.ioh.co.id
+    udp: true
   - name: vlessikdid-globalssh
     server: vless-ikd-id01.globalssh.xyz
     port: 80
@@ -219,11 +235,11 @@ proxies:
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: vmesssg-globalssh
+  - name: vmesssggs-globalssh
     server: vmess-sg01.globalssh.xyz
     port: 80
     type: vmess
-    uuid: bbd82cd9-1617-462d-a48d-ac845253b7f0
+    uuid: d65ece6f-2b70-4c71-96a9-a60b5081f1e9
     alterId: 0
     cipher: auto
     tls: false
@@ -235,21 +251,21 @@ proxies:
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: coba-globalssh
-    server: vmess-sg01.globalssh.xyz
-    port: 443
-    type: vmess
-    uuid: bbd82cd9-1617-462d-a48d-ac845253b7f0
+  - name: vlesssggs-globalssh
+    server: vless-sg01.globalssh.xyz
+    port: 80
+    type: vless
+    uuid: a76a2621-9b14-4545-b83f-7c3537c93597
     alterId: 0
     cipher: auto
     tls: false
     skip-cert-verify: true
-    servername: www.opensignal.com
+    servername: vless-sg01.globalssh.xyz
     network: ws
     ws-opts:
-      path: /
+      path: /api/v1/token/hetoken
       headers:
-        Host: vmess-sg01.globalssh.xyz
+        Host: myim3-he.ioh.co.id
     udp: true
   - name: vmessikdid-globalssh
     server: vmess-ikd-id01.globalssh.xyz
@@ -275,10 +291,11 @@ proxy-groups:
       - serverssh-vmesssg
       - serverssh-vlessid
       - serverssh-vlesssg
-      - vlesswhid-globalssh
+      #- vlesswhid-globalssh
+      - vmesswhid-globalssh
       - vlessikdid-globalssh
-      - vmesssg-globalssh
-      - coba-globalssh
+      - vmesssggs-globalssh
+      - vlesssggs-globalssh
      # - vmessikdid-globalssh
       - FALLBACK
       - BEST-PING
@@ -287,17 +304,18 @@ proxy-groups:
   - name: FALLBACK
     type: fallback
     url: https://speed.cloudflare.com/
-    interval: 100
-    tolerance: 50
+    interval: 200
+    tolerance: 100
     proxies:
       - serverssh-vmessid
       - serverssh-vmesssg
       - serverssh-vlessid
       - serverssh-vlesssg
-      - vlesswhid-globalssh
+      #- vlesswhid-globalssh
+      - vmesswhid-globalssh
       - vlessikdid-globalssh
-      - vmesssg-globalssh
-      - coba-globalssh
+      - vmesssggs-globalssh
+      - vlesssggs-globalssh
      # - vmessikdid-globalssh
   - name: BEST-PING
     type: url-test
@@ -309,10 +327,11 @@ proxy-groups:
       - serverssh-vmesssg
       - serverssh-vlessid
       - serverssh-vlesssg
-      - vlesswhid-globalssh
+      #- vlesswhid-globalssh
+      - vmesswhid-globalssh
       - vlessikdid-globalssh
-      - vmesssg-globalssh
-      - coba-globalssh
+      - vmesssggs-globalssh
+      - vlesssggs-globalssh
      # - vmessikdid-globalssh
   - name: LOAD-BALANCE
     type: load-balance
@@ -320,8 +339,8 @@ proxy-groups:
     url: https://speed.cloudflare.com/
     interval: 300
     proxies:
-      - vmesssg-globalssh
-      - coba-globalssh
+      - vmesssggs-globalssh
+      - vlesssggs-globalssh
 rule-providers:
   rule_Direct:
     type: file
