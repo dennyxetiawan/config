@@ -131,7 +131,7 @@ proxies:
     server: idray.serverip.my.id
     port: 80
     type: vmess
-    uuid: db807dae-c92e-453a-af86-6e11817074cb
+    uuid: 93dba1a7-cfc3-4040-80a3-dec053174292
     alterId: 0
     cipher: auto
     tls: false
@@ -147,7 +147,7 @@ proxies:
     server: sg1ray.serverip.my.id
     port: 80
     type: vmess
-    uuid: a0a7d2e1-70e2-432f-8b48-5ef54290c0aa
+    uuid: f3ae77d3-97aa-4180-bd05-107ad07157fc
     alterId: 0
     cipher: auto
     tls: false
@@ -159,41 +159,11 @@ proxies:
       headers:
         Host: myim3-he.ioh.co.id
     udp: true
-  - name: serverssh-vlessid
-    server: idray.serverip.my.id
-    port: 80
-    type: vless
-    uuid: f8c69fe8-5c1d-40c5-ae44-bd841e97f540
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: myim3-he.ioh.co.id
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken/serverssh/vray
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: serverssh-vlesssg
-    server: sg1ray.serverip.my.id
-    port: 80
-    type: vless
-    uuid: 6fa96c61-d460-4c5c-9e46-e212ed2e0e64
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: myim3-he.ioh.co.id
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken/serverssh/vray
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
   - name: vlesswhid-globalssh
     server: vless-wh-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: 71753dba-6a1c-4055-8318-2a92c122c4e1
+    uuid: bc0b74e6-14da-4ac2-8193-acfda0d5687c
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -224,7 +194,7 @@ proxies:
     server: vless-ikd-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: 2e45e552-24f2-4aa1-ab1c-8fae1ddd2783
+    uuid: 7407fb1f-68f7-4c29-bc08-e14fed161814
     cipher: auto
     tls: false
     skip-cert-verify: true
@@ -289,10 +259,8 @@ proxy-groups:
     proxies:
       - serverssh-vmessid
       - serverssh-vmesssg
-      - serverssh-vlessid
-      - serverssh-vlesssg
-      - vlesswhid-globalssh
-      #- vmesswhid-globalssh
+      #- vlesswhid-globalssh
+      - vmesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssggs-globalssh
       - vlesssggs-globalssh
@@ -309,14 +277,12 @@ proxy-groups:
     proxies:
       - serverssh-vmessid
       - serverssh-vmesssg
-      - serverssh-vlessid
-      - serverssh-vlesssg
-      - vlesswhid-globalssh
-      #- vmesswhid-globalssh
+      #- vlesswhid-globalssh
+      - vmesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssggs-globalssh
       - vlesssggs-globalssh
-      # - vmessikdid-globalssh
+     # - vmessikdid-globalssh
   - name: BEST-PING
     type: url-test
     url: https://speed.cloudflare.com/
@@ -325,10 +291,8 @@ proxy-groups:
     proxies:
       - serverssh-vmessid
       - serverssh-vmesssg
-      - serverssh-vlessid
-      - serverssh-vlesssg
-      - vlesswhid-globalssh
-      # - vmesswhid-globalssh
+      #- vlesswhid-globalssh
+      - vmesswhid-globalssh
       - vlessikdid-globalssh
       - vmesssggs-globalssh
       - vlesssggs-globalssh
