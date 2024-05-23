@@ -178,7 +178,7 @@ proxies:
     server: vmess-wh-id01.globalssh.xyz
     port: 80
     type: vmess
-    uuid: a2bf4fd8-3268-4845-a215-e61acba089e1
+    uuid: 547a56da-37de-4958-ac12-5056678d6ad0
     alterId: 0
     cipher: auto
     tls: false
@@ -194,7 +194,7 @@ proxies:
     server: vless-ikd-id01.globalssh.xyz
     port: 80
     type: vless
-    uuid: 7407fb1f-68f7-4c29-bc08-e14fed161814
+    uuid: 2e45e552-24f2-4aa1-ab1c-8fae1ddd2783
     cipher: auto
     tls: false
     skip-cert-verify: true
