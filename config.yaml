@@ -209,7 +209,7 @@ proxies:
     server: vmess-sg01.globalssh.xyz
     port: 80
     type: vmess
-    uuid: d65ece6f-2b70-4c71-96a9-a60b5081f1e9
+    uuid: f9013df1-1cd4-40dc-925d-53ed859840d2
     alterId: 0
     cipher: auto
     tls: false
@@ -225,7 +225,7 @@ proxies:
     server: vless-sg01.globalssh.xyz
     port: 80
     type: vless
-    uuid: a76a2621-9b14-4545-b83f-7c3537c93597
+    uuid: 6809bd7c-17b4-4664-9067-6d2ef0a9f046
     alterId: 0
     cipher: auto
     tls: false
@@ -319,7 +319,7 @@ rule-providers:
 rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - PROCESS-NAME,xray.exe,DIRECT
- # - PROCESS-NAME,svchost.exe,REJECT
+ - PROCESS-NAME,svchost.exe,REJECT
  # - RULE-SET,rule_Direct,DIRECT,no-resolve
  - RULE-SET,clash,REJECT
  - MATCH,Trafic-Umum
