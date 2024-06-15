@@ -5,7 +5,7 @@ mixed-port: 7893
 tproxy-port: 7895
 ipv6: false
 mode: rule
-log-level: info
+log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
 secret: ""
@@ -13,203 +13,30 @@ bind-address: "*"
 unified-delay: true
 profile:
   store-selected: true
-  store-fake-ip: true
 dns:
   enable: true
   ipv6: false
-  use-host: true
-  enhanced-mode: fake-ip
+  enhanced-mode: redir-host
   listen: 0.0.0.0:7874
   nameserver:
-    - 1.1.1.1
     - 8.8.8.8
-    - https://cloudflare-dns.com/dns-query
-  fallback:
     - 1.0.0.1
-    - 8.8.4.4
     - https://dns.google/dns-query
-    
+  fallback:
+    - 1.1.1.1
+    - 8.8.4.4
+    - https://cloudflare-dns.com/dns-query
+    - 112.215.203.254
   default-nameserver:
     - 8.8.8.8
     - 1.1.1.1
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - "*.lan"
-    - "*.localdomain"
-    - "*.example"
-    - "*.invalid"
-    - "*.localhost"
-    - "*.test"
-    - "*.local"
-    - "*.home.arpa"
-    - time.*.com
-    - time.*.gov
-    - time.*.edu.cn
-    - time.*.apple.com
-    - time1.*.com
-    - time2.*.com
-    - time3.*.com
-    - time4.*.com
-    - time5.*.com
-    - time6.*.com
-    - time7.*.com
-    - ntp.*.com
-    - ntp1.*.com
-    - ntp2.*.com
-    - ntp3.*.com
-    - ntp4.*.com
-    - ntp5.*.com
-    - ntp6.*.com
-    - ntp7.*.com
-    - "*.time.edu.cn"
-    - "*.ntp.org.cn"
-    - +.pool.ntp.org
-    - time1.cloud.tencent.com
-    - music.163.com
-    - "*.music.163.com"
-    - "*.126.net"
-    - musicapi.taihe.com
-    - music.taihe.com
-    - songsearch.kugou.com
-    - trackercdn.kugou.com
-    - "*.kuwo.cn"
-    - api-jooxtt.sanook.com
-    - api.joox.com
-    - joox.com
-    - y.qq.com
-    - "*.y.qq.com"
-    - streamoc.music.tc.qq.com
-    - mobileoc.music.tc.qq.com
-    - isure.stream.qqmusic.qq.com
-    - dl.stream.qqmusic.qq.com
-    - aqqmusic.tc.qq.com
-    - amobile.music.tc.qq.com
-    - "*.xiami.com"
-    - "*.music.migu.cn"
-    - music.migu.cn
-    - "*.msftconnecttest.com"
-    - "*.msftncsi.com"
-    - msftconnecttest.com
-    - msftncsi.com
-    - localhost.ptlogin2.qq.com
-    - localhost.sec.qq.com
-    - +.srv.nintendo.net
-    - +.stun.playstation.net
-    - xbox.*.microsoft.com
-    - xnotify.xboxlive.com
-    - +.battlenet.com.cn
-    - +.wotgame.cn
-    - +.wggames.cn
-    - +.wowsgame.cn
-    - +.wargaming.net
-    - proxy.golang.org
-    - stun.*.*
-    - stun.*.*.*
-    - +.stun.*.*
-    - +.stun.*.*.*
-    - +.stun.*.*.*.*
-    - heartbeat.belkin.com
-    - "*.linksys.com"
-    - "*.linksyssmartwifi.com"
-    - "*.router.asus.com"
-    - mesu.apple.com
-    - swscan.apple.com
-    - swquery.apple.com
-    - swdownload.apple.com
-    - swcdn.apple.com
-    - swdist.apple.com
-    - lens.l.google.com
-    - stun.l.google.com
-    - +.nflxvideo.net
-    - "*.square-enix.com"
-    - "*.finalfantasyxiv.com"
-    - "*.ffxiv.com"
-    - "*.mcdn.bilivideo.cn"
-    - +.media.dssott.com
+    - 112.215.203.254
 proxies:
-  - name: serverssh-vmessid
-    server: idray.serverip.my.id
+  - name: vmess-sg01.globalssh.xyz
+    server: nontontv.vidio.com
     port: 80
     type: vmess
-    uuid: 93dba1a7-cfc3-4040-80a3-dec053174292
-    alterId: 0
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: myim3-he.ioh.co.id
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: serverssh-vmesssg
-    server: sg1ray.serverip.my.id
-    port: 80
-    type: vmess
-    uuid: f3ae77d3-97aa-4180-bd05-107ad07157fc
-    alterId: 0
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: myim3-he.ioh.co.id
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: vlesswhid-globalssh
-    server: vless-wh-id01.globalssh.xyz
-    port: 80
-    type: vless
-    uuid: bc0b74e6-14da-4ac2-8193-acfda0d5687c
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: vless-wh-id01.globalssh.xyz
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: vmesswhid-globalssh
-    server: vmess-wh-id01.globalssh.xyz
-    port: 80
-    type: vmess
-    uuid: 547a56da-37de-4958-ac12-5056678d6ad0
-    alterId: 0
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: vmess-wh-id01.globalssh.xyz
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken/vmess-ws
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: vlessikdid-globalssh
-    server: vless-ikd-id01.globalssh.xyz
-    port: 80
-    type: vless
-    uuid: 2e45e552-24f2-4aa1-ab1c-8fae1ddd2783
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: vless-ikd-id01.globalssh.xyz
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: vmesssggs-globalssh
-    server: vmess-sg01.globalssh.xyz
-    port: 80
-    type: vmess
-    uuid: f9013df1-1cd4-40dc-925d-53ed859840d2
+    uuid: 0e983c57-1b09-4e42-a815-cb05d292000b
     alterId: 0
     cipher: auto
     tls: false
@@ -217,109 +44,41 @@ proxies:
     servername: vmess-sg01.globalssh.xyz
     network: ws
     ws-opts:
-      path: /api/v1/token/hetoken
+      path: /vmess-ws
       headers:
-        Host: myim3-he.ioh.co.id
+        Host: vmess-sg01.globalssh.xyz
     udp: true
-  - name: vlesssggs-globalssh
-    server: vless-sg01.globalssh.xyz
-    port: 80
-    type: vless
-    uuid: 6809bd7c-17b4-4664-9067-6d2ef0a9f046
-    alterId: 0
-    cipher: auto
-    tls: false
-    skip-cert-verify: true
-    servername: vless-sg01.globalssh.xyz
-    network: ws
-    ws-opts:
-      path: /api/v1/token/hetoken
-      headers:
-        Host: myim3-he.ioh.co.id
-    udp: true
-  - name: vmessikdid-globalssh
-    server: vmess-ikd-id01.globalssh.xyz
+  - name: id1-ray.ipservers.xyz
+    server: nontontv.vidio.com
     port: 80
     type: vmess
-    uuid: 59cc619a-1bb3-422d-87ae-46760dfca976
+    uuid: 1b58d604-0b4c-45b5-aaff-bce8f3905a36
     alterId: 0
     cipher: auto
     tls: false
     skip-cert-verify: true
-    servername: vmess-ikd-id01.globalssh.xyz
+    servername: id1-ray.ipservers.xyz
     network: ws
     ws-opts:
-      path: /api/v1/token/hetoken/vmess-ws/
+      path: /JAGOANSSH/
       headers:
-        Host: myim3-he.ioh.co.id
+        Host: id1-ray.ipservers.xyz
     udp: true
 proxy-groups:
-  - name: Trafic-Umum
+  - name: FASTSSH-SSHKIT-HOWDY
     type: select
     proxies:
-      - serverssh-vmessid
-      - serverssh-vmesssg
-      #- vlesswhid-globalssh
-      - vmesswhid-globalssh
-      - vlessikdid-globalssh
-      - vmesssggs-globalssh
-      - vlesssggs-globalssh
-     # - vmessikdid-globalssh
-      - FALLBACK
+      - vmess-sg01.globalssh.xyz
+      - id1-ray.ipservers.xyz
       - BEST-PING
-      - LOAD-BALANCE
       - DIRECT
-  - name: FALLBACK
-    type: fallback
-    url: https://speed.cloudflare.com/
-    interval: 200
-    tolerance: 100
-    proxies:
-      - serverssh-vmessid
-      - serverssh-vmesssg
-      #- vlesswhid-globalssh
-      - vmesswhid-globalssh
-      - vlessikdid-globalssh
-      - vmesssggs-globalssh
-      - vlesssggs-globalssh
-     # - vmessikdid-globalssh
   - name: BEST-PING
     type: url-test
-    url: https://speed.cloudflare.com/
+    url: http://hi.bonds.id/ping
     interval: 300
     tolerance: 50
     proxies:
-      - serverssh-vmessid
-      - serverssh-vmesssg
-      #- vlesswhid-globalssh
-      - vmesswhid-globalssh
-      - vlessikdid-globalssh
-      - vmesssggs-globalssh
-      - vlesssggs-globalssh
-     # - vmessikdid-globalssh
-  - name: LOAD-BALANCE
-    type: load-balance
-    strategy: round-robin
-    url: https://speed.cloudflare.com/
-    interval: 300
-    proxies:
-      - vmesssggs-globalssh
-      - vlesssggs-globalssh
-rule-providers:
-  rule_Direct:
-    type: file
-    behavior: classical
-    path: "./rule_direct.yaml"
-  clash:
-    type: http
-    behavior: domain
-    url: https://howdy.id/download/rules/clash.txt
-    path: ./providers/rule-provider_clash.yaml
-    interval: 86400
+      - vmess-sg01.globalssh.xyz
+      - id1-ray.ipservers.xyz
 rules:
- - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
- - PROCESS-NAME,xray.exe,DIRECT
- - PROCESS-NAME,svchost.exe,REJECT
- # - RULE-SET,rule_Direct,DIRECT,no-resolve
- - RULE-SET,clash,REJECT
- - MATCH,Trafic-Umum
+  - MATCH,FASTSSH-SSHKIT-HOWDY
